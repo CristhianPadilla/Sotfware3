@@ -13,12 +13,11 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             /* column:string */
-            $table->string('publication')->nullable()->defaul('text');
+            $table->string('categories',100)->nullable()->defaul('text');
             /* column:enum */
-            $table->enum('state_publication', ['published', 'reject','in_review'])->nullable()->defaul('in_review');
             /* column:text */
             $table->text('content_publication')->nullable();
             $table->timestamps();

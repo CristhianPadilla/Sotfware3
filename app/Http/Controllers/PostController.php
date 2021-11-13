@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -15,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts.index');
+        $posts = Post::orderBy('id','ASC')->paginate(10);
+        return view('dashboard.posts.index',['posts' => $posts]);
     }
 
     /**
@@ -72,7 +74,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $post->update($request->validated());
-        return back()->with('status', 'Publicación generada con éxito');
+        return back()->with('status', 'Publicación actualizada con éxito');
     }
 
     /**
@@ -84,7 +86,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return back()->with('status', 'Publicación generada con éxito');
+        return back()->with('status', 'Publicación eliminada con éxito');
        
     }
 }

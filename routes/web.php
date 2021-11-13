@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -15,12 +16,10 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-/* Conjunto de rutas a las cuales se accede mediante un prefijo */
-Route::prefix('dashboard')->group(function(){
-/*Llamamos las rutas del controlador PostController tipo resource route:resource */
+Route::get('dashboard')-> group(function () {
+    /* Llamamos las rutas del controlador PostController tipo resource
+    route:resource */
 Route::resource('post', PostController::class);
+Route::prefix('category', CategoryController::class);
 });
 
